@@ -91,6 +91,16 @@
   }
 }
 
+.mensagem-erro {
+  margin: 0;
+  padding: 6px 8px;
+  font-size: 14px;
+  color: var(--erro);
+  background: var(--erro-bg);
+  border: 1px solid var(--erro);
+  border-radius: 5px;
+}
+
 .botao-adicionar {
   font: inherit;
   font-size: 16px;
@@ -153,6 +163,11 @@
     padding: 0;
     list-style: none;
   }
+}
+
+.lista-gastos-vazio {
+  margin: 0;
+  color: var(--text);
 }
 
 .item-gasto {

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import FormularioGasto from './components/FormularioGasto'
 import ListaGastos from './components/ListaGastos'
 import TotalGastos from './components/TotalGastos'
@@ -5,6 +6,16 @@ import './App.css'
 
 // Página principal: reúne o formulário, o total e a lista de gastos.
 function App() {
+  const [gastos, setGastos] = useState([])
+
+  // Adiciona o novo gasto ao final da lista.
+  function adicionarGasto(novoGasto) {
+    setGastos((anteriores) => [...anteriores, novoGasto])
+  }
+
+  // O total é sempre derivado da lista, sem guardar estado duplicado.
+  const total = gastos.reduce((soma, gasto) => soma + gasto.valor, 0)
+
   return (
     <div className="app">
       <header className="cabecalho">
@@ -16,12 +27,11 @@ function App() {
 
       <main className="conteudo">
         <div className="conteudo-formulario">
-          <FormularioGasto />
-          {/* O total ainda é fixo; o cálculo vem na próxima missão. */}
-          <TotalGastos total={0} />
+          <FormularioGasto onAdicionar={adicionarGasto} />
+          <TotalGastos total={total} />
         </div>
 
-        <ListaGastos />
+        <ListaGastos gastos={gastos} />
       </main>
     </div>
   )
