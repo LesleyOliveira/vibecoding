@@ -214,3 +214,32 @@
   color: var(--text-h);
   font-variant-numeric: tabular-nums;
 }
+
+.item-gasto-acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.botao-remover {
+  font: inherit;
+  font-size: 14px;
+  padding: 6px 10px;
+  color: var(--erro);
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-color: var(--erro);
+    background: var(--erro-bg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--erro);
+    outline-offset: 2px;
+  }
+}

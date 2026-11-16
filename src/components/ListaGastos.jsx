@@ -1,7 +1,7 @@
 import { formatarMoeda } from '../utils/formatarMoeda'
 
 // Lista de gastos cadastrados, recebida da página principal.
-function ListaGastos({ gastos }) {
+function ListaGastos({ gastos, onRemover }) {
   return (
     <section className="lista-gastos">
       <h2>Gastos</h2>
@@ -16,9 +16,19 @@ function ListaGastos({ gastos }) {
                 <span className="item-gasto-descricao">{gasto.descricao}</span>
                 <span className="badge-categoria">{gasto.categoria}</span>
               </div>
-              <span className="item-gasto-valor">
-                {formatarMoeda(gasto.valor)}
-              </span>
+              <div className="item-gasto-acoes">
+                <span className="item-gasto-valor">
+                  {formatarMoeda(gasto.valor)}
+                </span>
+                <button
+                  type="button"
+                  className="botao-remover"
+                  onClick={() => onRemover(gasto.id)}
+                  aria-label={`Remover gasto ${gasto.descricao}`}
+                >
+                  Remover
+                </button>
+              </div>
             </li>
           ))}
         </ul>

@@ -13,6 +13,13 @@ function App() {
     setGastos((anteriores) => [...anteriores, novoGasto])
   }
 
+  // Remove o gasto pelo id; o total é recalculado a partir da nova lista.
+  function removerGasto(id) {
+    setGastos((anteriores) =>
+      anteriores.filter((gasto) => gasto.id !== id),
+    )
+  }
+
   // O total é sempre derivado da lista, sem guardar estado duplicado.
   const total = gastos.reduce((soma, gasto) => soma + gasto.valor, 0)
 
@@ -31,7 +38,7 @@ function App() {
           <TotalGastos total={total} />
         </div>
 
-        <ListaGastos gastos={gastos} />
+        <ListaGastos gastos={gastos} onRemover={removerGasto} />
       </main>
     </div>
   )
