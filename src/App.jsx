@@ -1,15 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import FiltroGastos from './components/FiltroGastos'
 import FormularioGasto from './components/FormularioGasto'
 import ListaGastos from './components/ListaGastos'
 import TotalGastos from './components/TotalGastos'
+import {
+  carregarGastos,
+  salvarGastos,
+} from './utils/armazenamentoGastos'
 import { TODAS_AS_CATEGORIAS } from './utils/categorias'
 import './App.css'
 
 // Página principal: reúne o formulário, o total e a lista de gastos.
 function App() {
-  const [gastos, setGastos] = useState([])
+  // Inicializador preguiçoso: lê o localStorage antes do primeiro render,
+  // para a lista já aparecer preenchida ao recarregar a página.
+  const [gastos, setGastos] = useState(carregarGastos)
   const [categoriaFiltro, setCategoriaFiltro] = useState(TODAS_AS_CATEGORIAS)
+
+  // Sempre que a lista mudar (adicionar ou remover), regrava a versão atual.
+  useEffect(() => {
+    salvarGastos(gastos)
+  }, [gastos])
 
   // Adiciona o novo gasto ao final da lista.
   function adicionarGasto(novoGasto) {
