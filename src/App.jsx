@@ -1,12 +1,15 @@
 import { useState } from 'react'
+import FiltroGastos from './components/FiltroGastos'
 import FormularioGasto from './components/FormularioGasto'
 import ListaGastos from './components/ListaGastos'
 import TotalGastos from './components/TotalGastos'
+import { TODAS_AS_CATEGORIAS } from './utils/categorias'
 import './App.css'
 
 // Página principal: reúne o formulário, o total e a lista de gastos.
 function App() {
   const [gastos, setGastos] = useState([])
+  const [categoriaFiltro, setCategoriaFiltro] = useState(TODAS_AS_CATEGORIAS)
 
   // Adiciona o novo gasto ao final da lista.
   function adicionarGasto(novoGasto) {
@@ -20,8 +23,20 @@ function App() {
     )
   }
 
-  // O total é sempre derivado da lista, sem guardar estado duplicado.
-  const total = gastos.reduce((soma, gasto) => soma + gasto.valor, 0)
+  // A lista exibida é derivada do filtro, sem guardar uma cópia no estado.
+  const gastosFiltrados =
+    categoriaFiltro === TODAS_AS_CATEGORIAS
+      ? gastos
+      : gastos.filter((gasto) => gasto.categoria === categoriaFiltro)
+
+  // O total acompanha o filtro: soma apenas os gastos visíveis na lista.
+  const total = gastosFiltrados.reduce((soma, gasto) => soma + gasto.valor, 0)
+
+  // Distingue a lista realmente vazia da categoria sem nenhum gasto.
+  const mensagemVazia =
+    gastos.length === 0
+      ? 'Nenhum gasto cadastrado ainda.'
+      : 'Nenhum gasto nesta categoria.'
 
   return (
     <div className="app">
@@ -38,7 +53,17 @@ function App() {
           <TotalGastos total={total} />
         </div>
 
-        <ListaGastos gastos={gastos} onRemover={removerGasto} />
+        <div className="conteudo-lista">
+          <FiltroGastos
+            categoriaSelecionada={categoriaFiltro}
+            onSelecionarCategoria={setCategoriaFiltro}
+          />
+          <ListaGastos
+            gastos={gastosFiltrados}
+            onRemover={removerGasto}
+            mensagemVazia={mensagemVazia}
+          />
+        </div>
       </main>
     </div>
   )

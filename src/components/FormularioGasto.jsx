@@ -1,7 +1,5 @@
 import { useState } from 'react'
-
-// Categorias fixas disponíveis para classificar os gastos.
-const CATEGORIAS = ['Alimentação', 'Transporte', 'Lazer', 'Outros']
+import { CATEGORIAS } from '../utils/categorias'
 
 // Converte "12,50" ou "12.50" em 12.5; devolve NaN quando não for número.
 function converterValor(valor) {

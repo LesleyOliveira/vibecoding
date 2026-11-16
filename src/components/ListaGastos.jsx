@@ -1,13 +1,17 @@
 import { formatarMoeda } from '../utils/formatarMoeda'
 
 // Lista de gastos cadastrados, recebida da página principal.
-function ListaGastos({ gastos, onRemover }) {
+function ListaGastos({
+  gastos,
+  onRemover,
+  mensagemVazia = 'Nenhum gasto cadastrado ainda.',
+}) {
   return (
     <section className="lista-gastos">
       <h2>Gastos</h2>
 
       {gastos.length === 0 ? (
-        <p className="lista-gastos-vazio">Nenhum gasto cadastrado ainda.</p>
+        <p className="lista-gastos-vazio">{mensagemVazia}</p>
       ) : (
         <ul>
           {gastos.map((gasto) => (

@@ -48,6 +48,22 @@
   gap: 16px;
 }
 
+.conteudo-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filtro-gastos {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  @media (max-width: 1024px) {
+    padding: 14px 16px;
+  }
+}
+
 .formulario-gasto {
   display: flex;
   flex-direction: column;
