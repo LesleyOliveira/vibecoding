@@ -4,9 +4,9 @@ Nome:
 
 | Categoria      | Antes | Depois |
 |----------------|-------|--------|
-| Acessibilidade |       |        |
-| Boas práticas  |       |        |
-| SEO            |       |        |
+| Acessibilidade | 95      |        |
+| Boas práticas  | 100  |        |
+| SEO            | 82     |        |
 
 ## O que foi corrigido (1 ou 2 linhas)
 
